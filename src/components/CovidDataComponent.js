@@ -23,9 +23,9 @@ function CovidComponent() {
       });
   }, []);
 
-  /* function numberWithCommas(x) {
+  const numberWithCommas = (x) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  } */
+  };
 
   const date = new Date(parseInt(worldData.updated));
   const lastUpdated = date.toString();
@@ -52,7 +52,7 @@ function CovidComponent() {
               </Typography>
 
               <Typography className={cardClass.pos} color="">
-                {worldData.recovered}
+                {numberWithCommas(parseInt(worldData.recovered))}
               </Typography>
               <Typography variant="body2" component="p">
                 Last update: {lastUpdated}
@@ -74,8 +74,8 @@ function CovidComponent() {
                 Total Cases
               </Typography>
 
-              <Typography className={cardClass.pos} color="">
-                {worldData.cases}
+              <Typography className={cardClass.pos} color="">      
+                {numberWithCommas(parseInt(worldData.cases))}
               </Typography>
               <Typography variant="body2" component="p">
                 Last update: {lastUpdated}
@@ -98,7 +98,7 @@ function CovidComponent() {
               </Typography>
 
               <Typography className={cardClass.pos} color="">
-                {worldData.deaths}
+                {numberWithCommas(parseInt(worldData.deaths))}
               </Typography>
               <Typography variant="body2" component="p">
                 Last update: {lastUpdated}
@@ -157,18 +157,22 @@ function CovidComponent() {
               <p>Active per One Million</p>
             </Grid>
             <Grid className="dataCircleDiv" item xs={12} md={2}>
-              <div className="dataCircle">{worldData.recoveredPerOneMillion}</div>
+              <div className="dataCircle">
+                {worldData.recoveredPerOneMillion}
+              </div>
               <p>Recovered per One Million</p>
             </Grid>
             <Grid className="dataCircleDiv" item xs={12} md={2}>
-              <div className="dataCircle">{worldData.criticalPerOneMillion}</div>
+              <div className="dataCircle">
+                {worldData.criticalPerOneMillion}
+              </div>
               <p>Critical per One Million</p>
             </Grid>
             <Grid className="dataCircleDiv" item xs={12} md={2}>
               <div className="dataCircle">{worldData.affectedCountries}</div>
               <p>Affected Countries</p>
             </Grid>
-          </Grid>          
+          </Grid>
         </Container>
       </div>
       <CountryData />
