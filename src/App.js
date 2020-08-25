@@ -1,5 +1,5 @@
 import React from 'react';
-import CovidComponent from './components/CovidDataComponent';
+import WorldData from './components/WorldDataComponent';
 import Header from './components/HeaderComponent';
 import './App.css';
 
@@ -7,7 +7,7 @@ function App() {
   return (
     <div>
       <Header />
-      <CovidComponent />
+      <WorldData />
     </div>
   );
 }

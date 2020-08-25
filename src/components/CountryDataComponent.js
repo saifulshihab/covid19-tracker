@@ -3,7 +3,6 @@ import axios from 'axios';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Grid, CardContent, Typography } from '@material-ui/core';
-import { Input } from '@material-ui/core';
 import { countryStyles } from './AppStyles';
 function CountryData() {
   const [countryData, setCountryData] = useState([]);
@@ -25,10 +24,7 @@ function CountryData() {
   };
   return (
     <div>
-      <h1 style={{ textAlign: 'center' }}>COUNTRY</h1>
-      <Grid container style={{ marginBottom: '20px' }}>
-        <Input style={{ width: '100%' }} placeholder="Search Country..." />
-      </Grid>
+      <h1 style={{ textAlign: 'center' }}>200+ COUNTRIES</h1>
       <Grid container spacing={2}>
         {countryData.map((data) => (
           <Grid item xs={12} md={2}>
