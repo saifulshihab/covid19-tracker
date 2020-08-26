@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import {
   Grid,
@@ -16,12 +17,14 @@ import { countryStyles } from './AppStyles';
 function CountryData() {
   const [countryData, setCountryData] = useState([]);
   const [countrysearch, setCountrysearch] = useState('');
+  const [dataLoad, setDataload] = useState(false);
 
   useEffect(() => {
     axios
       .get('https://corona.lmao.ninja/v2/countries')
       .then((res) => {
         setCountryData(res.data);
+        setDataload(true);
       })
       .catch((err) => {
         console.log(err);
@@ -95,7 +98,15 @@ function CountryData() {
             />
           </Typography>
           <hr />
-          <Typography style={{fontStyle: 'italic', fontWeight: 'bold', color: '#03a9f4'}} component="p" variant="body2">
+          <Typography
+            style={{
+              fontStyle: 'italic',
+              fontWeight: 'bold',
+              color: '#03a9f4',
+            }}
+            component="p"
+            variant="body2"
+          >
             Last 24 Hours
           </Typography>
 
@@ -105,7 +116,7 @@ function CountryData() {
               value={data.todayCases}
               displayType={'text'}
               thousandSeparator={true}
-              style={{color: '#ff5722'}}
+              style={{ color: '#ff5722' }}
             />
           </Typography>
           <Typography component="p" variant="body2">
@@ -122,7 +133,7 @@ function CountryData() {
               value={data.todayRecovered}
               displayType={'text'}
               thousandSeparator={true}
-              style={{color: '#009688'}}
+              style={{ color: '#009688' }}
             />
           </Typography>
           <hr />
@@ -223,7 +234,8 @@ function CountryData() {
         </FormGroup>
       </div>
       <Grid container spacing={3}>
-        {countries}
+        {!dataLoad ? <CircularProgress style={{margin: '0 auto'}} size={140} color="secondary" thickness={1.6} /> : <div></div>}
+        { countries }
       </Grid>
     </div>
   );

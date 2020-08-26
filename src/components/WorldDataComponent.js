@@ -9,22 +9,25 @@ import Typography from '@material-ui/core/Typography';
 import { gridStyles, cardStyles } from './AppStyles';
 import CountryData from './CountryDataComponent';
 import NumberFormat from 'react-number-format';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 function WorldData() {
   const [worldData, setWorldData] = useState({});
+  const [dataLoad, setDataload] = useState(false);
 
   useEffect(() => {
     axios
       .get('https://corona.lmao.ninja/v2/all')
       .then((res) => {
         setWorldData(res.data);
+        setDataload(true);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  const date = new Date(parseInt(worldData.updated));
+  const date = dataLoad ? new Date(parseInt(worldData.updated)) : 'Loading...';
   const lastUpdated = date.toString();
 
   const classes = gridStyles();
@@ -44,6 +47,7 @@ function WorldData() {
               <Typography className={cardClass.title} gutterBottom>
                 Total Recoverd
               </Typography>
+              {!dataLoad ? <CircularProgress /> : <span></span>}
               <Typography className={cardClass.pos}>
                 <NumberFormat
                   value={worldData.recovered}
@@ -64,7 +68,7 @@ function WorldData() {
               <Typography className={cardClass.title} gutterBottom>
                 Total Cases
               </Typography>
-
+              {!dataLoad ? <CircularProgress /> : <span></span>}
               <Typography className={cardClass.pos}>
                 <NumberFormat
                   value={worldData.cases}
@@ -85,7 +89,7 @@ function WorldData() {
               <Typography className={cardClass.title} gutterBottom>
                 Total Death
               </Typography>
-
+              {!dataLoad ? <CircularProgress /> : <span></span>}
               <Typography className={cardClass.pos}>
                 <NumberFormat
                   value={worldData.deaths}
@@ -107,11 +111,15 @@ function WorldData() {
               <Card className="">
                 <CardContent>
                   <Typography component="h5" variant="h5">
-                    <NumberFormat
-                      value={worldData.todayCases}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                    />
+                    {dataLoad ? (
+                      <NumberFormat
+                        value={worldData.todayCases}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                      />
+                    ) : (
+                      <CircularProgress />
+                    )}
                   </Typography>
                 </CardContent>
                 <p>Today's Cases</p>
@@ -121,11 +129,15 @@ function WorldData() {
               <Card className="">
                 <CardContent>
                   <Typography component="h5" variant="h5">
-                    <NumberFormat
-                      value={worldData.todayDeaths}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                    />
+                    {dataLoad ? (
+                      <NumberFormat
+                        value={worldData.todayDeaths}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                      />
+                    ) : (
+                      <CircularProgress />
+                    )}
                   </Typography>
                 </CardContent>
                 <p>Today's Death</p>
@@ -135,11 +147,15 @@ function WorldData() {
               <Card className="">
                 <CardContent>
                   <Typography component="h5" variant="h5">
-                    <NumberFormat
-                      value={worldData.todayRecovered}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                    />
+                    {dataLoad ? (
+                      <NumberFormat
+                        value={worldData.todayRecovered}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                      />
+                    ) : (
+                      <CircularProgress />
+                    )}
                   </Typography>
                 </CardContent>
                 <p>Today's Recovered</p>
@@ -149,11 +165,15 @@ function WorldData() {
               <Card className="">
                 <CardContent>
                   <Typography component="h5" variant="h5">
-                    <NumberFormat
-                      value={worldData.active}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                    />
+                    {dataLoad ? (
+                      <NumberFormat
+                        value={worldData.active}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                      />
+                    ) : (
+                      <CircularProgress />
+                    )}
                   </Typography>
                 </CardContent>
                 <p>Active Cases</p>
@@ -163,11 +183,15 @@ function WorldData() {
               <Card className="">
                 <CardContent>
                   <Typography component="h5" variant="h5">
-                    <NumberFormat
-                      value={worldData.critical}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                    />
+                    {dataLoad ? (
+                      <NumberFormat
+                        value={worldData.critical}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                      />
+                    ) : (
+                      <CircularProgress />
+                    )}
                   </Typography>
                 </CardContent>
                 <p>Active Critical</p>
@@ -177,11 +201,15 @@ function WorldData() {
               <Card className="">
                 <CardContent>
                   <Typography component="h5" variant="h5">
-                    <NumberFormat
-                      value={worldData.casesPerOneMillion}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                    />
+                    {dataLoad ? (
+                      <NumberFormat
+                        value={worldData.casesPerOneMillion}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                      />
+                    ) : (
+                      <CircularProgress />
+                    )}
                   </Typography>
                 </CardContent>
                 <p>Cases per One Million</p>
@@ -191,11 +219,15 @@ function WorldData() {
               <Card className="">
                 <CardContent>
                   <Typography component="h5" variant="h5">
-                    <NumberFormat
-                      value={worldData.deathsPerOneMillion}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                    />
+                    {dataLoad ? (
+                      <NumberFormat
+                        value={worldData.deathsPerOneMillion}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                      />
+                    ) : (
+                      <CircularProgress />
+                    )}
                   </Typography>
                 </CardContent>
                 <p>Deaths per One Million</p>
@@ -205,11 +237,15 @@ function WorldData() {
               <Card className="">
                 <CardContent>
                   <Typography component="h5" variant="h5">
-                    <NumberFormat
-                      value={worldData.testsPerOneMillion}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                    />
+                    {dataLoad ? (
+                      <NumberFormat
+                        value={worldData.testsPerOneMillion}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                      />
+                    ) : (
+                      <CircularProgress />
+                    )}
                   </Typography>
                 </CardContent>
                 <p>Test per One Million</p>
@@ -219,11 +255,15 @@ function WorldData() {
               <Card className="">
                 <CardContent>
                   <Typography component="h5" variant="h5">
-                    <NumberFormat
-                      value={worldData.tests}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                    />
+                    {dataLoad ? (
+                      <NumberFormat
+                        value={worldData.tests}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                      />
+                    ) : (
+                      <CircularProgress />
+                    )}
                   </Typography>
                 </CardContent>
                 <p>Total Test</p>
@@ -233,11 +273,15 @@ function WorldData() {
               <Card className="">
                 <CardContent>
                   <Typography component="h5" variant="h5">
-                    <NumberFormat
-                      value={worldData.population}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                    />
+                    {dataLoad ? (
+                      <NumberFormat
+                        value={worldData.population}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                      />
+                    ) : (
+                      <CircularProgress />
+                    )}
                   </Typography>
                 </CardContent>
                 <p>Population</p>
@@ -247,11 +291,15 @@ function WorldData() {
               <Card className="">
                 <CardContent>
                   <Typography component="h5" variant="h5">
-                    <NumberFormat
-                      value={worldData.activePerOneMillion}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                    />
+                    {dataLoad ? (
+                      <NumberFormat
+                        value={worldData.activePerOneMillion}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                      />
+                    ) : (
+                      <CircularProgress />
+                    )}
                   </Typography>
                 </CardContent>
                 <p>Active per One Million</p>
@@ -261,11 +309,15 @@ function WorldData() {
               <Card className="">
                 <CardContent>
                   <Typography component="h5" variant="h5">
-                    <NumberFormat
-                      value={worldData.recoveredPerOneMillion}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                    />
+                    {dataLoad ? (
+                      <NumberFormat
+                        value={worldData.recoveredPerOneMillion}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                      />
+                    ) : (
+                      <CircularProgress />
+                    )}
                   </Typography>
                 </CardContent>
                 <p>Recovered per One Million</p>
@@ -275,11 +327,15 @@ function WorldData() {
               <Card className="">
                 <CardContent>
                   <Typography component="h5" variant="h5">
-                    <NumberFormat
-                      value={worldData.criticalPerOneMillion}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                    />
+                    {dataLoad ? (
+                      <NumberFormat
+                        value={worldData.criticalPerOneMillion}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                      />
+                    ) : (
+                      <CircularProgress />
+                    )}
                   </Typography>
                 </CardContent>
                 <p>Critical per One Million</p>
@@ -289,11 +345,15 @@ function WorldData() {
               <Card className="">
                 <CardContent>
                   <Typography component="h5" variant="h5">
-                    <NumberFormat
-                      value={worldData.affectedCountries}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                    />
+                    {dataLoad ? (
+                      <NumberFormat
+                        value={worldData.affectedCountries}
+                        displayType={'text'}
+                        thousandSeparator={true}
+                      />
+                    ) : (
+                      <CircularProgress />
+                    )}
                   </Typography>
                 </CardContent>
                 <p>Affected Countries</p>
