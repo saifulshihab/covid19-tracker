@@ -3,10 +3,10 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import MenuIcon from '@material-ui/icons/Menu';
+import PublicIcon from '@material-ui/icons/Public';
 import { headerStyles } from './AppStyles';
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/Search';
+import GitHubIcon from '@material-ui/icons/GitHub';
+import Button from '@material-ui/core/Button';
 
 export default function Header() {
   const classes = headerStyles();
@@ -21,23 +21,21 @@ export default function Header() {
             color="inherit"
             aria-label="open drawer"
           >
-            <MenuIcon />
+            <PublicIcon />
           </IconButton>
           <Typography className={classes.title} variant="h6" noWrap>
             Covid-19 Tracker
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search country..."
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
+          <div>
+            <Button
+              variant="contained"
+              color="primary"
+              target="_blank"
+              href="https://github.com/saifulshihab/covid19-tracker"
+            >
+            <GitHubIcon />
+            </Button>
+            
           </div>
         </Toolbar>
       </AppBar>

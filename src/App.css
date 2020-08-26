@@ -1,29 +1,30 @@
-.worldOthers{
-    margin-top: 20px;
+.worldOthers {
+  margin-top: 20px;
 }
-.worldOthers ul{list-style: none;}
-.dataCircleDiv{
-    text-align: center;
+.worldOthers ul {
+  list-style: none;
 }
-.dataCircle{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background: #fff;
-    border: 1px solid rgb(199, 89, 250);
-    font-size: 2rem;
+.dataCircleDiv {
+  text-align: center;
 }
-.dot{
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    display: inline-block;
-    background: #84878a;
-    margin-right: 6px;
+.updateText {
+  margin: 15px 0;
+  text-align: center;
+  font-style: italic;
+  color: #aaaaaa;
 }
-.dot1{background: #2196f3}
-.dot2{background: #2BAE66FF;}
-.dot3{background: #f44336;}
+.worldHeader {
+  text-align: center;
+  font-size: 3rem;
+  margin: 0;
+}
+.srcBox {
+  margin: 20px;
+}
+.dataText {
+  font-size: 30px;
+  margin: 20px 0;
+}
+.countryData{
+  margin-top: 60px;
+}

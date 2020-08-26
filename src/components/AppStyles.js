@@ -2,15 +2,16 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 
 export const headerStyles = makeStyles((theme) => ({
   root: {
+    marginTop: '70px',
     flexGrow: 1,
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(1),
   },
   title: {
     flexGrow: 1,
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
+    display: 'none',  
+    [theme.breakpoints.up('xs')]: {
       display: 'block',
     },
   },
@@ -36,22 +37,6 @@ export const headerStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  inputRoot: {
-    color: 'inherit',
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '30ch',
-      '&:focus': {
-        width: '40ch',
-      },
-    },
   },
 
 }));
@@ -93,7 +78,7 @@ export const cardStyles = makeStyles({
 });
 export const countryStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    maxWidth: '100%',
   },
   cover: {
     height: 160,

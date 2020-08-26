@@ -8,6 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import { gridStyles, cardStyles } from './AppStyles';
 import CountryData from './CountryDataComponent';
+import NumberFormat from 'react-number-format';
 
 function WorldData() {
   const [worldData, setWorldData] = useState({});
@@ -23,10 +24,6 @@ function WorldData() {
       });
   }, []);
 
-  const numberWithCommas = (x) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  };
-
   const date = new Date(parseInt(worldData.updated));
   const lastUpdated = date.toString();
 
@@ -35,73 +32,67 @@ function WorldData() {
 
   return (
     <div className={classes.root}>
-      <h1 style={{ textAlign: 'center' }}>WORLDWIDE</h1>
+      <h1 className="worldHeader">Wordlwide</h1>
+      <div className="updateText">Last update: {lastUpdated}</div>
       <Grid container spacing={3}>
         <Grid item xs={12} md={4}>
           <Card
             className={cardClass.root}
-            style={{ borderBottomColor: '#2BAE66FF' }}
+            style={{ borderBottomColor: '#009688' }}
           >
             <CardContent>
-              <Typography
-                className={cardClass.title}
-                color="textLight"
-                gutterBottom
-              >
+              <Typography className={cardClass.title} gutterBottom>
                 Total Recoverd
               </Typography>
-
-              <Typography className={cardClass.pos} color="">
-                {numberWithCommas(parseInt(worldData.recovered))}
-              </Typography>
-              <Typography variant="body2" component="p">
-                Last update: {lastUpdated}
+              <Typography className={cardClass.pos}>
+                <NumberFormat
+                  value={worldData.recovered}
+                  displayType={'text'}
+                  thousandSeparator={true}
+                  style={{ color: '#009688' }}
+                />
               </Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid item xs={12} md={4}>
           <Card
-            style={{ borderBottomColor: '#2196f3' }}
+            style={{ borderBottomColor: '#03A9F4' }}
             className={cardClass.root}
           >
             <CardContent>
-              <Typography
-                className={cardClass.title}
-                color="textLight"
-                gutterBottom
-              >
+              <Typography className={cardClass.title} gutterBottom>
                 Total Cases
               </Typography>
 
-              <Typography className={cardClass.pos} color="">
-                {numberWithCommas(parseInt(worldData.cases))}
-              </Typography>
-              <Typography variant="body2" component="p">
-                Last update: {lastUpdated}
+              <Typography className={cardClass.pos}>
+                <NumberFormat
+                  value={worldData.cases}
+                  displayType={'text'}
+                  thousandSeparator={true}
+                  style={{ color: '#03A9F4' }}
+                />
               </Typography>
             </CardContent>
           </Card>
         </Grid>
         <Grid item xs={12} md={4}>
           <Card
-            style={{ borderBottomColor: '#f44336' }}
+            style={{ borderBottomColor: '#F44336' }}
             className={cardClass.root}
           >
             <CardContent>
-              <Typography
-                className={cardClass.title}
-                color="textLight"
-                gutterBottom
-              >
+              <Typography className={cardClass.title} gutterBottom>
                 Total Death
               </Typography>
 
-              <Typography className={cardClass.pos} color="">
-                {numberWithCommas(parseInt(worldData.deaths))}
-              </Typography>
-              <Typography variant="body2" component="p">
-                Last update: {lastUpdated}
+              <Typography className={cardClass.pos}>
+                <NumberFormat
+                  value={worldData.deaths}
+                  displayType={'text'}
+                  thousandSeparator={true}
+                  style={{ color: '#F44336' }}
+                />
               </Typography>
             </CardContent>
           </Card>
@@ -115,8 +106,12 @@ function WorldData() {
             <Grid className="dataCircleDiv" item xs={12} md={2}>
               <Card className="">
                 <CardContent>
-                  <Typography component="h54" variant="h5">
-                    {numberWithCommas(parseInt(worldData.todayCases))}
+                  <Typography component="h5" variant="h5">
+                    <NumberFormat
+                      value={worldData.todayCases}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                    />
                   </Typography>
                 </CardContent>
                 <p>Today's Cases</p>
@@ -125,8 +120,12 @@ function WorldData() {
             <Grid className="dataCircleDiv" item xs={12} md={2}>
               <Card className="">
                 <CardContent>
-                  <Typography component="h54" variant="h5">
-                    {numberWithCommas(parseInt(worldData.todayDeaths))}
+                  <Typography component="h5" variant="h5">
+                    <NumberFormat
+                      value={worldData.todayDeaths}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                    />
                   </Typography>
                 </CardContent>
                 <p>Today's Death</p>
@@ -135,8 +134,12 @@ function WorldData() {
             <Grid className="dataCircleDiv" item xs={12} md={2}>
               <Card className="">
                 <CardContent>
-                  <Typography component="h54" variant="h5">
-                    {numberWithCommas(parseInt(worldData.todayRecovered))}
+                  <Typography component="h5" variant="h5">
+                    <NumberFormat
+                      value={worldData.todayRecovered}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                    />
                   </Typography>
                 </CardContent>
                 <p>Today's Recovered</p>
@@ -145,8 +148,12 @@ function WorldData() {
             <Grid className="dataCircleDiv" item xs={12} md={2}>
               <Card className="">
                 <CardContent>
-                  <Typography component="h54" variant="h5">
-                    {numberWithCommas(parseInt(worldData.active))}
+                  <Typography component="h5" variant="h5">
+                    <NumberFormat
+                      value={worldData.active}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                    />
                   </Typography>
                 </CardContent>
                 <p>Active Cases</p>
@@ -155,8 +162,12 @@ function WorldData() {
             <Grid className="dataCircleDiv" item xs={12} md={2}>
               <Card className="">
                 <CardContent>
-                  <Typography component="h54" variant="h5">
-                    {numberWithCommas(parseInt(worldData.critical))}
+                  <Typography component="h5" variant="h5">
+                    <NumberFormat
+                      value={worldData.critical}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                    />
                   </Typography>
                 </CardContent>
                 <p>Active Critical</p>
@@ -165,8 +176,12 @@ function WorldData() {
             <Grid className="dataCircleDiv" item xs={12} md={2}>
               <Card className="">
                 <CardContent>
-                  <Typography component="h54" variant="h5">
-                    {numberWithCommas(parseInt(worldData.casesPerOneMillion))}
+                  <Typography component="h5" variant="h5">
+                    <NumberFormat
+                      value={worldData.casesPerOneMillion}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                    />
                   </Typography>
                 </CardContent>
                 <p>Cases per One Million</p>
@@ -175,8 +190,12 @@ function WorldData() {
             <Grid className="dataCircleDiv" item xs={12} md={2}>
               <Card className="">
                 <CardContent>
-                  <Typography component="h54" variant="h5">
-                    {numberWithCommas(parseInt(worldData.deathsPerOneMillion))}
+                  <Typography component="h5" variant="h5">
+                    <NumberFormat
+                      value={worldData.deathsPerOneMillion}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                    />
                   </Typography>
                 </CardContent>
                 <p>Deaths per One Million</p>
@@ -185,8 +204,12 @@ function WorldData() {
             <Grid className="dataCircleDiv" item xs={12} md={2}>
               <Card className="">
                 <CardContent>
-                  <Typography component="h54" variant="h5">
-                    {numberWithCommas(parseInt(worldData.testsPerOneMillion))}
+                  <Typography component="h5" variant="h5">
+                    <NumberFormat
+                      value={worldData.testsPerOneMillion}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                    />
                   </Typography>
                 </CardContent>
                 <p>Test per One Million</p>
@@ -195,8 +218,12 @@ function WorldData() {
             <Grid className="dataCircleDiv" item xs={12} md={2}>
               <Card className="">
                 <CardContent>
-                  <Typography component="h54" variant="h5">
-                    {numberWithCommas(parseInt(worldData.tests))}
+                  <Typography component="h5" variant="h5">
+                    <NumberFormat
+                      value={worldData.tests}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                    />
                   </Typography>
                 </CardContent>
                 <p>Total Test</p>
@@ -205,8 +232,12 @@ function WorldData() {
             <Grid className="dataCircleDiv" item xs={12} md={2}>
               <Card className="">
                 <CardContent>
-                  <Typography component="h54" variant="h5">
-                    {numberWithCommas(parseInt(worldData.population))}
+                  <Typography component="h5" variant="h5">
+                    <NumberFormat
+                      value={worldData.population}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                    />
                   </Typography>
                 </CardContent>
                 <p>Population</p>
@@ -215,8 +246,12 @@ function WorldData() {
             <Grid className="dataCircleDiv" item xs={12} md={2}>
               <Card className="">
                 <CardContent>
-                  <Typography component="h54" variant="h5">
-                    {numberWithCommas(parseInt(worldData.activePerOneMillion))}
+                  <Typography component="h5" variant="h5">
+                    <NumberFormat
+                      value={worldData.activePerOneMillion}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                    />
                   </Typography>
                 </CardContent>
                 <p>Active per One Million</p>
@@ -225,10 +260,12 @@ function WorldData() {
             <Grid className="dataCircleDiv" item xs={12} md={2}>
               <Card className="">
                 <CardContent>
-                  <Typography component="h54" variant="h5">
-                    {numberWithCommas(
-                      parseInt(worldData.recoveredPerOneMillion)
-                    )}
+                  <Typography component="h5" variant="h5">
+                    <NumberFormat
+                      value={worldData.recoveredPerOneMillion}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                    />
                   </Typography>
                 </CardContent>
                 <p>Recovered per One Million</p>
@@ -237,10 +274,12 @@ function WorldData() {
             <Grid className="dataCircleDiv" item xs={12} md={2}>
               <Card className="">
                 <CardContent>
-                  <Typography component="h54" variant="h5">
-                    {numberWithCommas(
-                      parseInt(worldData.criticalPerOneMillion)
-                    )}
+                  <Typography component="h5" variant="h5">
+                    <NumberFormat
+                      value={worldData.criticalPerOneMillion}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                    />
                   </Typography>
                 </CardContent>
                 <p>Critical per One Million</p>
@@ -249,8 +288,12 @@ function WorldData() {
             <Grid className="dataCircleDiv" item xs={12} md={2}>
               <Card className="">
                 <CardContent>
-                  <Typography component="h54" variant="h5">
-                    {numberWithCommas(parseInt(worldData.affectedCountries))}
+                  <Typography component="h5" variant="h5">
+                    <NumberFormat
+                      value={worldData.affectedCountries}
+                      displayType={'text'}
+                      thousandSeparator={true}
+                    />
                   </Typography>
                 </CardContent>
                 <p>Affected Countries</p>
