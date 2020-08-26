@@ -20,7 +20,7 @@ function CountryData() {
   useEffect(() => {
     axios
       .get('https://corona.lmao.ninja/v2/countries')
-      .then((res) => {       
+      .then((res) => {
         setCountryData(res.data);
       })
       .catch((err) => {
@@ -95,12 +95,17 @@ function CountryData() {
             />
           </Typography>
           <hr />
+          <Typography style={{fontStyle: 'italic', fontWeight: 'bold', color: '#03a9f4'}} component="p" variant="body2">
+            Last 24 Hours
+          </Typography>
+
           <Typography component="p" variant="body2">
-            Today's Cases:{' '}
+            Cases:{' '}
             <NumberFormat
               value={data.todayCases}
               displayType={'text'}
               thousandSeparator={true}
+              style={{color: '#ff5722'}}
             />
           </Typography>
           <Typography component="p" variant="body2">
@@ -117,6 +122,7 @@ function CountryData() {
               value={data.todayRecovered}
               displayType={'text'}
               thousandSeparator={true}
+              style={{color: '#009688'}}
             />
           </Typography>
           <hr />
