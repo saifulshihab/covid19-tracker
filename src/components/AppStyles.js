@@ -86,4 +86,8 @@ export const countryStyles = makeStyles((theme) => ({
   content: {
     flex: '1 0 auto',
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
 }));

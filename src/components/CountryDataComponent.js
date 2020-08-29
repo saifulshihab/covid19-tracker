@@ -8,16 +8,21 @@ import {
   Grid,
   CardContent,
   Typography,
-  Input,
-  FormGroup,
+  Input,  
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl
 } from '@material-ui/core';
 import NumberFormat from 'react-number-format';
 import { countryStyles } from './AppStyles';
 
 function CountryData() {
+  
   const [countryData, setCountryData] = useState([]);
   const [countrysearch, setCountrysearch] = useState('');
-  const [dataLoad, setDataload] = useState(false);
+  const [dataLoad, setDataload] = useState(false);  
+  const [selectItem, setSelectitem] = useState('');
 
   useEffect(() => {
     axios
@@ -32,11 +37,208 @@ function CountryData() {
   }, []);
   const classes = countryStyles();
 
+  const setCountrysearchHandler = (e) => {
+    setSelectitem('');
+    setCountrysearch(e.target.value);
+  }
+
   const searchCountry = countryData.filter((item) => {
     return countrysearch !== ''
       ? item.country.toLowerCase().includes(countrysearch.toLowerCase())
       : item;
   });
+
+  const selecfilterData = countryData.sort((a, b) => {       
+    return selectItem !== '' && selectItem === 'Most Affected Country' ? b.cases - a.cases :
+    selectItem !== '' && selectItem === 'Less Affected Country' ? a.cases - b.cases 
+    : searchCountry;
+  })
+
+  const selectSrcData = selecfilterData.map((data, index) => (
+    <Grid key={index} item xs={12} sm={4} md={2}>
+      <Card className={classes.root}>
+        <CardMedia
+          className={classes.cover}
+          image={data.countryInfo.flag}
+          title={data.country}
+        />
+        <CardContent>
+          <Typography component="h6" variant="h6">
+            {data.country}
+          </Typography>
+          <Typography component="p" variant="body2">
+            Total Cases:{' '}
+            <NumberFormat
+              value={data.cases}
+              displayType={'text'}
+              thousandSeparator={true}
+            />
+          </Typography>
+          <Typography component="p" variant="body2">
+            Recovered:{' '}
+            <NumberFormat
+              value={data.recovered}
+              displayType={'text'}
+              thousandSeparator={true}
+            />
+          </Typography>
+          <Typography component="p" variant="body2">
+            Death:{' '}
+            <NumberFormat
+              value={data.deaths}
+              displayType={'text'}
+              thousandSeparator={true}
+            />
+          </Typography>
+          <Typography component="p" variant="body2">
+            Active:{' '}
+            <NumberFormat
+              value={data.active}
+              displayType={'text'}
+              thousandSeparator={true}
+            />
+          </Typography>
+          <Typography component="p" variant="body2">
+            Critical:{' '}
+            <NumberFormat
+              value={data.critical}
+              displayType={'text'}
+              thousandSeparator={true}
+            />
+          </Typography>
+          <Typography component="p" variant="body2">
+            Test:{' '}
+            <NumberFormat
+              value={data.tests}
+              displayType={'text'}
+              thousandSeparator={true}
+            />
+          </Typography>
+          <hr />
+          <Typography
+            style={{
+              fontStyle: 'italic',
+              fontWeight: 'bold',
+              color: '#03a9f4',
+            }}
+            component="p"
+            variant="body2"
+          >
+            Last 24 Hours
+          </Typography>
+
+          <Typography component="p" variant="body2">
+            Cases:{' '}
+            <NumberFormat
+              value={data.todayCases}
+              displayType={'text'}
+              thousandSeparator={true}
+              style={{ color: '#ff5722' }}
+            />
+          </Typography>
+          <Typography component="p" variant="body2">
+            Death:{' '}
+            <NumberFormat
+              value={data.todayDeaths}
+              displayType={'text'}
+              thousandSeparator={true}
+            />
+          </Typography>
+          <Typography component="p" variant="body2">
+            Recovered:{' '}
+            <NumberFormat
+              value={data.todayRecovered}
+              displayType={'text'}
+              thousandSeparator={true}
+              style={{ color: '#009688' }}
+            />
+          </Typography>
+          <hr />
+          <Typography component="p" variant="body2">
+            Cases/M:{' '}
+            <NumberFormat
+              value={data.casesPerOneMillion}
+              displayType={'text'}
+              thousandSeparator={true}
+            />
+          </Typography>
+          <Typography component="p" variant="body2">
+            Deaths/M:{' '}
+            <NumberFormat
+              value={data.deathsPerOneMillion}
+              displayType={'text'}
+              thousandSeparator={true}
+            />
+          </Typography>
+          <Typography component="p" variant="body2">
+            Tests/M:{' '}
+            <NumberFormat
+              value={data.testsPerOneMillion}
+              displayType={'text'}
+              thousandSeparator={true}
+            />
+          </Typography>
+          <Typography component="p" variant="body2">
+            Population:{' '}
+            <NumberFormat
+              value={data.population}
+              displayType={'text'}
+              thousandSeparator={true}
+            />
+          </Typography>
+          <Typography component="p" variant="body2">
+            1Case/People:{' '}
+            <NumberFormat
+              value={data.oneCasePerPeople}
+              displayType={'text'}
+              thousandSeparator={true}
+            />
+          </Typography>
+          <Typography component="p" variant="body2">
+            1Death/People:{' '}
+            <NumberFormat
+              value={data.oneDeathPerPeople}
+              displayType={'text'}
+              thousandSeparator={true}
+            />
+          </Typography>
+          <Typography component="p" variant="body2">
+            1Test/People:{' '}
+            <NumberFormat
+              value={data.oneTestPerPeople}
+              displayType={'text'}
+              thousandSeparator={true}
+            />
+          </Typography>
+          <Typography component="p" variant="body2">
+            Active/M:{' '}
+            <NumberFormat
+              value={data.activePerOneMillion}
+              displayType={'text'}
+              thousandSeparator={true}
+            />
+          </Typography>
+          <Typography component="p" variant="body2">
+            Recoveres/M:{' '}
+            <NumberFormat
+              value={data.recoveredPerOneMillion}
+              displayType={'text'}
+              thousandSeparator={true}
+            />
+          </Typography>
+          <Typography component="p" variant="body2">
+            Critical/M:{' '}
+            <NumberFormat
+              value={data.criticalPerOneMillion}
+              displayType={'text'}
+              thousandSeparator={true}
+            />
+          </Typography>
+        </CardContent>
+      </Card>
+    </Grid>    
+  ));
+
   const countries = searchCountry.map((data, index) => (
     <Grid key={index} item xs={12} sm={4} md={2}>
       <Card className={classes.root}>
@@ -225,18 +427,41 @@ function CountryData() {
     <div className="countryData">
       <h1 className="worldHeader">200+ Countries</h1>
       <div className="srcBox">
-        <FormGroup>
+        
+        <FormControl className={classes.formControl}>
+        <InputLabel id="srclevel">Type country name</InputLabel>        
           <Input
             type="text"
-            onChange={(e) => setCountrysearch(e.target.value)}
-            placeholder="Search Country..."
-          />
-        </FormGroup>
+            labelId="srclevel"
+            onChange={setCountrysearchHandler}            
+            placeholder="Country name..."
+          />        
+          </FormControl>
+          <FormControl className={classes.formControl}>
+        <InputLabel id="selectLabel">Select search</InputLabel>
+        <Select
+        labelId="selectLabel"
+          value={selectItem}
+          onChange={(e) => setSelectitem(e.target.value)}                    
+        >       
+         <MenuItem value="">
+            <em>None</em>
+          </MenuItem>  
+          <MenuItem value="Most Affected Country">Most Affected Country</MenuItem>
+          <MenuItem value="Less Affected Country">Less Affected Country</MenuItem>
+          </Select>
+          </FormControl>
+        
+        
       </div>
       <Grid container spacing={3}>
         {!dataLoad ? <CircularProgress style={{margin: '0 auto'}} size={140} color="secondary" thickness={1.6} /> : <div></div>}
+        
+        {selectItem !== '' ? selectSrcData : <div></div>}
+
         { countries }
-      </Grid>
+
+      </Grid>        
     </div>
   );
 }
