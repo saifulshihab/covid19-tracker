@@ -8,20 +8,19 @@ import {
   Grid,
   CardContent,
   Typography,
-  Input,  
+  Input,
   Select,
   MenuItem,
   InputLabel,
-  FormControl
+  FormControl,
 } from '@material-ui/core';
 import NumberFormat from 'react-number-format';
 import { countryStyles } from './AppStyles';
 
 function CountryData() {
-  
   const [countryData, setCountryData] = useState([]);
   const [countrysearch, setCountrysearch] = useState('');
-  const [dataLoad, setDataload] = useState(false);  
+  const [dataLoad, setDataload] = useState(false);
   const [selectItem, setSelectitem] = useState('');
 
   useEffect(() => {
@@ -40,7 +39,7 @@ function CountryData() {
   const setCountrysearchHandler = (e) => {
     setSelectitem('');
     setCountrysearch(e.target.value);
-  }
+  };
 
   const searchCountry = countryData.filter((item) => {
     return countrysearch !== ''
@@ -48,11 +47,19 @@ function CountryData() {
       : item;
   });
 
-  const selecfilterData = countryData.sort((a, b) => {       
-    return selectItem !== '' && selectItem === 'Most Affected Country' ? b.cases - a.cases :
-    selectItem !== '' && selectItem === 'Less Affected Country' ? a.cases - b.cases 
-    : searchCountry;
-  })
+  const selecfilterData = countryData.sort((a, b) => {
+    if (selectItem !== '') {
+      if (selectItem === 'Most Affected Country') {
+        return b.cases - a.cases;
+      } else if (selectItem === 'Less Affected Country') {
+        return a.cases - b.cases;
+      } else {
+        return null;
+      }
+    } else {
+      return searchCountry;
+    }
+  });
 
   const selectSrcData = selecfilterData.map((data, index) => (
     <Grid key={index} item xs={12} sm={4} md={2}>
@@ -236,7 +243,7 @@ function CountryData() {
           </Typography>
         </CardContent>
       </Card>
-    </Grid>    
+    </Grid>
   ));
 
   const countries = searchCountry.map((data, index) => (
@@ -427,41 +434,50 @@ function CountryData() {
     <div className="countryData">
       <h1 className="worldHeader">200+ Countries</h1>
       <div className="srcBox">
-        
         <FormControl className={classes.formControl}>
-        <InputLabel id="srclevel">Type country name</InputLabel>        
+          <InputLabel id="srclevel">Type country name</InputLabel>
           <Input
             type="text"
-            labelId="srclevel"
-            onChange={setCountrysearchHandler}            
+            labelid="srclevel"
+            onChange={setCountrysearchHandler}
             placeholder="Country name..."
-          />        
-          </FormControl>
-          <FormControl className={classes.formControl}>
-        <InputLabel id="selectLabel">Select search</InputLabel>
-        <Select
-        labelId="selectLabel"
-          value={selectItem}
-          onChange={(e) => setSelectitem(e.target.value)}                    
-        >       
-         <MenuItem value="">
-            <em>None</em>
-          </MenuItem>  
-          <MenuItem value="Most Affected Country">Most Affected Country</MenuItem>
-          <MenuItem value="Less Affected Country">Less Affected Country</MenuItem>
+          />
+        </FormControl>
+        <FormControl className={classes.formControl}>
+          <InputLabel id="selectLabel">Select</InputLabel>
+          <Select
+            labelId="selectLabel"
+            value={selectItem}
+            onChange={(e) => setSelectitem(e.target.value)}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value="Most Affected Country">
+              Most Affected Country
+            </MenuItem>
+            <MenuItem value="Less Affected Country">
+              Less Affected Country
+            </MenuItem>
           </Select>
-          </FormControl>
-        
-        
+        </FormControl>
       </div>
       <Grid container spacing={3}>
-        {!dataLoad ? <CircularProgress style={{margin: '0 auto'}} size={140} color="secondary" thickness={1.6} /> : <div></div>}
-        
+        {!dataLoad ? (
+          <CircularProgress
+            style={{ margin: '0 auto' }}
+            size={140}
+            color="secondary"
+            thickness={1.6}
+          />
+        ) : (
+          <div></div>
+        )}
+
         {selectItem !== '' ? selectSrcData : <div></div>}
 
-        { countries }
-
-      </Grid>        
+        {countries}
+      </Grid>
     </div>
   );
 }
