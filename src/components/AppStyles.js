@@ -10,7 +10,7 @@ export const headerStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
-    display: 'none',  
+    display: 'none',
     [theme.breakpoints.up('xs')]: {
       display: 'block',
     },
@@ -38,7 +38,6 @@ export const headerStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
 }));
 
 export const gridStyles = makeStyles((theme) => ({
@@ -58,7 +57,7 @@ export const cardStyles = makeStyles({
   root: {
     minWidth: 275,
     textAlign: 'center',
-    borderBottom: '3px solid'
+    borderBottom: '3px solid',
   },
   title: {
     fontSize: 20,
@@ -70,7 +69,7 @@ export const cardStyles = makeStyles({
   },
   cases: {
     backgroundColor: 'red',
-    borderBottomColor: 'red'
+    borderBottomColor: 'red',
   },
   death: {
     backgroundColor: 'blue',
@@ -90,4 +89,8 @@ export const countryStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     minWidth: 120,
   },
+  chartClass: {
+    textAlign: 'center',
+  },
 }));
+ 

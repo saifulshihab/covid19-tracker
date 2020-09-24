@@ -10,6 +10,7 @@ import { gridStyles, cardStyles } from './AppStyles';
 import CountryData from './CountryDataComponent';
 import NumberFormat from 'react-number-format';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import BarChart from './BarChart';
 
 function WorldData() {
   const [worldData, setWorldData] = useState({});
@@ -362,6 +363,7 @@ function WorldData() {
           </Grid>
         </Container>
       </div>
+      <BarChart />
       <CountryData />
     </div>
   );

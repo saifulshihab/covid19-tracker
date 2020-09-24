@@ -433,51 +433,57 @@ function CountryData() {
   return (
     <div className="countryData">
       <h1 className="worldHeader">200+ Countries</h1>
-      <div className="srcBox">
-        <FormControl className={classes.formControl}>
-          <InputLabel id="srclevel">Type country name</InputLabel>
-          <Input
-            type="text"
-            labelid="srclevel"
-            onChange={setCountrysearchHandler}
-            placeholder="Country name..."
-          />
-        </FormControl>
-        <FormControl className={classes.formControl}>
-          <InputLabel id="selectLabel">Select</InputLabel>
-          <Select
-            labelId="selectLabel"
-            value={selectItem}
-            onChange={(e) => setSelectitem(e.target.value)}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value="Most Affected Country">
-              Most Affected Country
-            </MenuItem>
-            <MenuItem value="Less Affected Country">
-              Less Affected Country
-            </MenuItem>
-          </Select>
-        </FormControl>
-      </div>
       <Grid container spacing={3}>
-        {!dataLoad ? (
-          <CircularProgress
-            style={{ margin: '0 auto' }}
-            size={140}
-            color="secondary"
-            thickness={1.6}
-          />
-        ) : (
-          <div></div>
-        )}
-
-        {selectItem !== '' ? selectSrcData : <div></div>}
-
-        {countries}
+        <Grid item xs={12}>
+          <div className="srcBox">
+            <FormControl className={classes.formControl}>
+              <InputLabel id="srclevel">Type country name</InputLabel>
+              <Input
+                type="text"
+                labelid="srclevel"
+                onChange={setCountrysearchHandler}
+                placeholder="Country name..."
+              />
+            </FormControl>
+            <FormControl className={classes.formControl}>
+              <InputLabel id="selectLabel">Select</InputLabel>
+              <Select
+                labelId="selectLabel"
+                value={selectItem}
+                onChange={(e) => setSelectitem(e.target.value)}
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value="Most Affected Country">
+                  Most Affected Country
+                </MenuItem>
+                <MenuItem value="Less Affected Country">
+                  Less Affected Country
+                </MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+        </Grid>
       </Grid>
+      {
+        <Grid container spacing={3}>
+          {!dataLoad ? (
+            <CircularProgress
+              style={{ margin: '0 auto' }}
+              size={140}
+              color="secondary"
+              thickness={1.6}
+            />
+          ) : (
+            <div></div>
+          )}
+
+          {selectItem !== '' ? selectSrcData : <div></div>}
+
+          {countries}
+        </Grid>
+      }
     </div>
   );
 }
