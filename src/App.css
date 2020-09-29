@@ -32,6 +32,11 @@
   width: 90%;
   margin: 0 auto;
 }
-.bar__chart h2{
+.bar__chart h2 {
   text-align: center;
+}
+._chart {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px #ddd;
 }

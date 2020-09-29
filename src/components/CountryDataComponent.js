@@ -451,10 +451,7 @@ function CountryData() {
                 labelId="selectLabel"
                 value={selectItem}
                 onChange={(e) => setSelectitem(e.target.value)}
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
+              >    
                 <MenuItem value="Most Affected Country">
                   Most Affected Country
                 </MenuItem>
