@@ -17,8 +17,7 @@ function BarChart() {
       .then((res) => res.json())
       .then((data) => {
         data.splice(0, 30).map((d) => {
-          const formattedCase = numeral(d.cases).format('0.0a');
-          console.log(formattedCase.toString());
+          const formattedCase = numeral(d.cases).format('0.0a');         
           setLabel((l) => [...l, d.country]);
           setData((dd) => [...dd, d.cases]);
         });
